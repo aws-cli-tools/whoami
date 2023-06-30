@@ -1,4 +1,4 @@
-use anyhow::{Context, Result};
+use anyhow::{Result};
 use clap::Parser;
 use std::fmt::Debug;
 use whoami::{OutputType, StsClient};
@@ -30,8 +30,7 @@ async fn main() -> Result<()> {
 
     let client = StsClient::new(&shared_config);
     whoami::get_caller_identity(&client, args.output_type, &mut std::io::stdout())
-        .await
-        .with_context(|| "Error writing response into terminal")?;
+        .await?;
 
     Ok(())
 }

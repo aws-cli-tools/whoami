@@ -13,6 +13,15 @@ clap = { version = "4.3.9", features = ["derive"] }
 env_logger = "0.10.0"
 log = "0.4.19"
 mockall = "0.11.4"
-rstest = "0.17.0"
 serde_json = "1.0.99"
 tokio = { version = "1.29.0", features = ["full"] }
+
+[dev-dependencies]
+assert_cmd = "2.0.11"
+predicates = "3.0.3"
+rand = "0.8.5"
+rstest = "0.17.0"
+
+[features]
+aws_configured = []
+
