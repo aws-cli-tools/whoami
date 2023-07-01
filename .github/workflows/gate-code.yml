@@ -17,7 +17,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
-      permissions: write-all
+      checks: write
     runs-on: ubuntu-latest      
     steps:
       - name: Configure AWS Credentials
