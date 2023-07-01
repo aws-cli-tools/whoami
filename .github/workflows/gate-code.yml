@@ -3,6 +3,7 @@ name: Code Gating
 on:
   pull_request:
     branches: [ "main" ]
+  working-directory: ./whoami
 
 env:
   CARGO_TERM_COLOR: always
@@ -32,12 +33,12 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       - name: Build
         uses: actions-rs/cargo@v1
-          with:
-            command: build
+        with:
+          command: build
       - name: Test (UT + IT)
         uses: actions-rs/cargo@v1
-          with:
-            command: test --all-features
+        with:
+          command: test --all-features
       - uses: actions-rs/install@v0.1
         with:
           crate: grcov
@@ -50,8 +51,8 @@ jobs:
           minimum_coverage: 75
       - name: Lint via clippy
           uses: actions-rs/clippy-check@v1
-            with:
-              token: ${{ secrets.GITHUB_TOKEN }}
-              args: --all-features
+          with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+            args: --all-features
    
     
