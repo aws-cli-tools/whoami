@@ -34,7 +34,6 @@ jobs:
           override: true
       - name: Add llvm-tools-preview
         run: rustup component add llvm-tools-preview
-      - uses: Swatinem/rust-cache@v2
       - name: Build
         uses: actions-rs/cargo@v1
         with:
