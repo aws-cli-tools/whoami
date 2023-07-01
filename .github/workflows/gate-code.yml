@@ -26,8 +26,6 @@ jobs:
           role-to-assume: arn:aws:iam::201893381538:role/GitHubRole
           role-session-name: GitHubActionsSession
       - uses: actions/checkout@v3
-      - name: Test
-        run: ls -l && pwd
       - name: Install stable toolchain
         uses: actions-rs/toolchain@v1
         with:
@@ -36,14 +34,10 @@ jobs:
           override: true
       - name: Add llvm-tools-preview
         run: rustup component add llvm-tools-preview
-      - name: Build
-        uses: actions-rs/cargo@v1
-        with:
-          command: build
-      - name: Test (UT + IT)
-        uses: actions-rs/cargo@v1
-        with:
-          command: test --all-features
+      - name: Build + Test
+        run: |
+          cargo build
+          cargo test --all-features
       - uses: actions-rs/install@v0.1
         with:
           crate: grcov
