@@ -43,11 +43,12 @@ jobs:
         with:
           crate: grcov
           version: latest
+          use-tool-cache: true
       - name: Collect code coverage
         run: grcov . -s . --binary-path ./target/debug/ -t cobertura --branch --ignore-not-existing -o ./
       - uses: 5monkeys/cobertura-action@master
         with:
-          path: ./cobertura.xml
+          path: ./cli/cobertura.xml
           minimum_coverage: 75
       - name: Lint via clippy
         uses: actions-rs/clippy-check@v1
