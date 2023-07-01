@@ -6,7 +6,11 @@ on:
       - '**/Cargo.lock'
   schedule:
     - cron: '0 0 * * *'
-  working-directory: ./whoami
+
+defaults:
+  run:
+    working-directory: ./whoami
+
 jobs:
   security_audit:
     runs-on: ubuntu-latest
