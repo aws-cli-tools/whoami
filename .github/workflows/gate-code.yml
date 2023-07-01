@@ -27,7 +27,7 @@ jobs:
           role-session-name: GitHubActionsSession
       - uses: actions/checkout@v3
       - name: Test
-        run: ls -l
+        run: ls -l && pwd
       - name: Install stable toolchain
         uses: actions-rs/toolchain@v1
         with:
