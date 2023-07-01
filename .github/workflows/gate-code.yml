@@ -42,10 +42,11 @@ jobs:
       - uses: actions-rs/install@v0.1
         with:
           crate: grcov
-          version: latest
+          version: 0.8.18
           use-tool-cache: true
       - name: Collect code coverage
         run: grcov . -s . --binary-path ./target/debug/ -t cobertura --branch --ignore-not-existing -o ./
+      - run: ls -l && pwd
       - uses: 5monkeys/cobertura-action@master
         with:
           path: ./cli/cobertura.xml
