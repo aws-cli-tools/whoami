@@ -36,7 +36,7 @@ pub struct StsClient {
 impl StsClient {
     pub fn new(sdk_config: &::aws_types::sdk_config::SdkConfig) -> Self {
         Self {
-            client: Client::new(&sdk_config),
+            client: Client::new(sdk_config),
         }
     }
 }
@@ -102,7 +102,7 @@ pub async fn get_caller_identity(
                 "accountId": account_id,
                 "UserARN": user_arn,
             });
-            writeln!(writer, "{}", result.to_string())?;
+            writeln!(writer, "{}", result)?;
         }
     }
 

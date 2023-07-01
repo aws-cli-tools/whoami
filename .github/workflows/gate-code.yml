@@ -6,17 +6,52 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
+  RUSTFLAGS: -Cinstrument-coverage
+  LLVM_PROFILE_FILE: vscode-%p-%m.profraw
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-latest      
     steps:
-    - uses: actions/checkout@v3
-    - name: Build
-      run: cargo build --verbose
-    - name: Run tests
-      run: cargo test
-    - name: Run IT
-      run: cargo test --features aws_configured
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::201893381538:role/GitHubRole
+          role-session-name: GitHubActionsSession
+      - uses: actions/checkout@v3
+      - name: Install stable toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: stable
+          override: true
+      - name: Add llvm-tools-preview
+        run: rustup component add llvm-tools-preview
+      - uses: Swatinem/rust-cache@v2
+      - name: Build
+        uses: actions-rs/cargo@v1
+          with:
+            command: build
+      - name: Test (UT + IT)
+        uses: actions-rs/cargo@v1
+          with:
+            command: test --all-features
+      - uses: actions-rs/install@v0.1
+        with:
+          crate: grcov
+          version: latest
+      - name: Collect code coverage
+        run: grcov . -s . --binary-path ./target/debug/ -t cobertura --branch --ignore-not-existing -o ./
+      - uses: 5monkeys/cobertura-action@master
+        with:
+          path: ./cobertura.xml
+          minimum_coverage: 75
+      - name: Lint via clippy
+          uses: actions-rs/clippy-check@v1
+            with:
+              token: ${{ secrets.GITHUB_TOKEN }}
+              args: --all-features
+   
+    
