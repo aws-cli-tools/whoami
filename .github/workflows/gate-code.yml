@@ -3,7 +3,9 @@ name: Code Gating
 on:
   pull_request:
     branches: [ "main" ]
-  working-directory: ./whoami
+defaults:
+  run:
+    working-directory: ./whoami
 
 env:
   CARGO_TERM_COLOR: always
