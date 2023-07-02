@@ -13,7 +13,7 @@ test-all:
 	cargo test --all-features
 
 code-coverage $CARGO_INCREMENTAL="{{cargo_incremental}}":
-	LLVM_PROFILE_FILE=tmp-%p-%m.profraw RUSTFLAGS=-Cinstrument-coverage cargo test-all
+	LLVM_PROFILE_FILE=tmp-%p-%m.profraw RUSTFLAGS=-Cinstrument-coverage cargo test --all-features
 	grcov . -s . --binary-path ./target/debug/ -t lcov --branch --ignore '../*' --ignore "/*" --ignore-not-existing -o ./target/cov.lcov
 	rm -f *.profraw
 
