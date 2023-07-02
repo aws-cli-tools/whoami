@@ -7,10 +7,6 @@ on:
   schedule:
     - cron: '0 0 * * *'
 
-defaults:
-  run:
-    working-directory: ./cli
-
 jobs:
   security_audit:
     runs-on: ubuntu-latest

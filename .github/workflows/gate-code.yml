@@ -6,9 +6,6 @@ on:
       - main
   pull_request:
     branches: [ "main" ]
-defaults:
-  run:
-    working-directory: ./cli
 
 env:
   CARGO_TERM_COLOR: always
@@ -39,8 +36,6 @@ jobs:
           override: true
           components: llvm-tools-preview, rustfmt
       - uses: Swatinem/rust-cache@v2
-        with:
-          workspaces: "cli -> target"
       - name: Format code
         run: cargo fmt --all -- --check
       - name: Build + Test
@@ -55,13 +50,13 @@ jobs:
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         with:
-          files: "./cli/lcov"
+          files: "lcov"
           token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Lint via clippy
         uses: actions-rs/clippy-check@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          args: --all-features --manifest-path=cli/Cargo.toml
+          args: --all-features
    
     
