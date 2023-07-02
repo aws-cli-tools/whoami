@@ -2,6 +2,8 @@ name: Code Gating
 
 on:
   push:
+    branches:
+      - master
   pull_request:
     branches: [ "main" ]
 defaults:
@@ -19,6 +21,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
+      checks: write
     runs-on: ubuntu-latest      
     steps:
       - name: Configure AWS Credentials
