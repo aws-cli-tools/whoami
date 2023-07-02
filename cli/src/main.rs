@@ -1,4 +1,4 @@
-use anyhow::{Result};
+use anyhow::Result;
 use clap::Parser;
 use std::fmt::Debug;
 use whoami::{OutputType, StsClient};
@@ -29,8 +29,7 @@ async fn main() -> Result<()> {
     let shared_config = whoami::get_aws_config(args.profile, region_provider).await;
 
     let client = StsClient::new(&shared_config);
-    whoami::get_caller_identity(&client, args.output_type, &mut std::io::stdout())
-        .await?;
+    whoami::get_caller_identity(&client, args.output_type, &mut std::io::stdout()).await?;
 
     Ok(())
 }

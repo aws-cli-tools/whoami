@@ -1,6 +1,9 @@
 name: Code Gating
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
     branches: [ "main" ]
 defaults:
@@ -18,6 +21,7 @@ jobs:
     permissions:
       id-token: write
       contents: read
+      checks: write
     runs-on: ubuntu-latest      
     steps:
       - name: Configure AWS Credentials
@@ -33,10 +37,12 @@ jobs:
           profile: minimal
           toolchain: stable
           override: true
-          components: llvm-tools-preview
+          components: llvm-tools-preview, rustfmt
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: "cli -> target"
+      - name: Format code
+        run: cargo fmt --all -- --check
       - name: Build + Test
         run: |
           cargo build
