@@ -1,12 +1,12 @@
 name: Release
 on:
   push:
-    # paths: 
-    #   - '**/Cargo.toml'
-    #   - '**/Cargo.lock'
-    #   - 'src/**'
-    # branches:
-    #   - main
+    paths: 
+      - '**/Cargo.toml'
+      - '**/Cargo.lock'
+      - 'src/**'
+    branches:
+      - main
 
 env:
   BIN_NAME: whoami
