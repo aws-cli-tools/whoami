@@ -9,17 +9,16 @@ The CLI is flexible and allows output in either a standard string or JSON format
 ## Usage
 To run the CLI:
 ```bash
-whoami [FLAGS] [OPTIONS]
+whoami [OPTIONS]
 ```
-Flags:
 
-* `-h, --help` Prints help information
-* `-V, --version` Prints version information
+
 Options:
 
-* `-o, --output_type` The output format (default is string)
+* `-h, --help` Prints help information
+* `-o, --output_type` The output format (default is string) --> Fix
 * `-p, --profile` The AWS profile to use
 * `-r, --region` The AWS region to use
 
 ## Contributing
-TBD
+
