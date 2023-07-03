@@ -9,9 +9,6 @@ on:
 
 env:
   CARGO_TERM_COLOR: always
-  RUSTFLAGS: -Cinstrument-coverage
-  LLVM_PROFILE_FILE: vscode-%p-%m.profraw
-  CARGO_INCREMENTAL: 0
 
 jobs:
   build:
@@ -21,6 +18,8 @@ jobs:
       checks: write
     runs-on: ubuntu-latest      
     steps:
+      - uses: taiki-e/install-action@just
+      - uses: taiki-e/install-action@grcov
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -36,27 +35,14 @@ jobs:
           override: true
           components: llvm-tools-preview, rustfmt
       - uses: Swatinem/rust-cache@v2
-      - name: Format code
-        run: cargo fmt --all -- --check
-      - name: Build + Test
-        run: |
-          cargo build
-          cargo test --all-features
+      - name: Gate
+        run: just gate
       - name: Collect code coverage
-        run: |
-          wget https://github.com/mozilla/grcov/releases/download/v0.8.18/grcov-x86_64-unknown-linux-gnu.tar.bz2
-          tar -xvjf grcov-x86_64-unknown-linux-gnu.tar.bz2
-          ./grcov . -s . --binary-path ./target/debug/ -t lcov --branch --ignore '../*' --ignore "/*" --ignore-not-existing -o ./
+        run: just code-coverage
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         with:
           files: "lcov"
           token: ${{ secrets.CODECOV_TOKEN }}
-
-      - name: Lint via clippy
-        uses: actions-rs/clippy-check@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          args: --all-features
    
     
