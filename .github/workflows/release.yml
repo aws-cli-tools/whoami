@@ -44,6 +44,7 @@ jobs:
           os: macos-latest
           rust: stable
           target: aarch64-apple-darwin
+          cross: true
 
     steps:
       - name: Checkout sources
