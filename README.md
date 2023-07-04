@@ -20,5 +20,10 @@ Options:
 * `-p, --profile` The AWS profile to use
 * `-r, --region` The AWS region to use
 
-## Contributing
+## Running locally
+* You can always use `cargo` to manage the build and tests.
+* We use [`just`](https://github.com/casey/just) as a command running.
+* Use `just gate` to run all checks locally.
 
+## Contributing
+See our [CONTRIBUTION](CONTRIBUTION.md) page
