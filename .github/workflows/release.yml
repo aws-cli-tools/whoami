@@ -52,9 +52,9 @@ jobs:
           override: true
 
       - name: Run cargo test
+        if: matrix.build != 'aarch64-macos'
         uses: actions-rs/cargo@v1
         with:
-          if: matrix.build != 'aarch64-macos'
           use-cross: ${{ matrix.cross }}
           command: test
           args: --release --locked --target ${{ matrix.target }}
