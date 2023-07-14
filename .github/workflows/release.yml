@@ -169,6 +169,8 @@ jobs:
     needs: [publish]
     runs-on: ubuntu-latest      
     steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
       - name: Install bin-install
         run: curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
       - name: Install rustwrap

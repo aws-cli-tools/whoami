@@ -1,10 +1,10 @@
 targets:
   - platform: darwin
     arch: x64
-    url_template: https://github.com/aws-cli-tools/whoami/releases/download/v__VERSION__/whoami-v__VERSION__-x86_64-macos.tar.xz
+    url_template: https://github.com/aws-cli-tools/whoami/releases/download/__VERSION__/whoami-__VERSION__-x86_64-macos.tar.xz
   - platform: darwin
     arch: x64
-    url_template: https://github.com/aws-cli-tools/whoami/releases/download/v__VERSION__/whoami-v__VERSION__-aarch64-macos.tar.xz
+    url_template: https://github.com/aws-cli-tools/whoami/releases/download/__VERSION__/whoami-__VERSION__-aarch64-macos.tar.xz
 brew:
   name: whoamo
   publish: true # push an update commit to the tap repo
