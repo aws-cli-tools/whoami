@@ -1,7 +1,7 @@
 use anyhow::Result;
 use clap::Parser;
 use std::fmt::Debug;
-use whoami::{OutputType, StsClient};
+use whoamiaws::{OutputType, StsClient};
 
 #[derive(Debug, Parser)]
 struct Opt {
@@ -24,12 +24,12 @@ async fn main() -> Result<()> {
     env_logger::init();
     let args = Opt::parse();
 
-    let region_provider = whoami::get_region_provider(args.region);
+    let region_provider = whoamiaws::get_region_provider(args.region);
 
-    let shared_config = whoami::get_aws_config(args.profile, region_provider).await;
+    let shared_config = whoamiaws::get_aws_config(args.profile, region_provider).await;
 
     let client = StsClient::new(&shared_config);
-    whoami::get_caller_identity(&client, args.output_type, &mut std::io::stdout()).await?;
+    whoamiaws::get_caller_identity(&client, args.output_type, &mut std::io::stdout()).await?;
 
     Ok(())
 }

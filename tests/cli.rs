@@ -7,7 +7,7 @@ mod cli_tests {
     #[cfg(feature = "aws_configured")]
     #[test]
     fn happy_flow() {
-        let mut cmd = Command::cargo_bin("whoami").unwrap();
+        let mut cmd = Command::cargo_bin("whoamiaws").unwrap();
 
         cmd.assert()
             .success()
