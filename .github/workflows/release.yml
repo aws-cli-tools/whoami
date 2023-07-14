@@ -178,5 +178,6 @@ jobs:
       - name: Deploy to brew
         env:
           TAG_NAME: ${{needs.publish.outputs.tagname}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: rustwrap --tag $TAG_NAME
       
