@@ -167,14 +167,14 @@ jobs:
     permissions:
       contents: write
     needs: [publish]
-    runs-on: ubuntu-latest
-    env:
-      TAG_NAME: ${{needs.publish.outputs.tagname}}
+    runs-on: ubuntu-latest      
     steps:
       - name: Install bin-install
         run: curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
       - name: Install rustwrap
         run: cargo binstall rustwrap
       - name: Deploy to brew
-         run: rustwrap --tag $TAG_NAME
+        env:
+          TAG_NAME: ${{needs.publish.outputs.tagname}}
+        run: rustwrap --tag $TAG_NAME
       
