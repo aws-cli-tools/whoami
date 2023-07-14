@@ -172,7 +172,7 @@ jobs:
       - name: Install bin-install
         run: curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
       - name: Install rustwrap
-        run: cargo binstall rustwrap
+        run: cargo binstall -y rustwrap
       - name: Deploy to brew
         env:
           TAG_NAME: ${{needs.publish.outputs.tagname}}
