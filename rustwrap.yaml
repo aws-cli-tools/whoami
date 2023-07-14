@@ -19,6 +19,6 @@ brew:
       sha256 "__SHA__"
 
       def install
-        bin.install "whoami"
+        bin.install "whoamiaws"
       end
     end
