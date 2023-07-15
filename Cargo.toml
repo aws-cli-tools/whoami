@@ -6,7 +6,7 @@ edition = "2021"
 [dependencies]
 anyhow = "1.0.71"
 async-trait = "0.1.68"
-aws-config = "0.55.3"
+aws-config = { version = "0.55.3", default-features = false, features = ["rustls"] }
 aws-sdk-sts = "0.28.0"
 aws-types = "0.55.3"
 clap = { version = "4.3.9", features = ["derive"] }
