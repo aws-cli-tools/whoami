@@ -19,5 +19,6 @@ RUN curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/ca
 RUN cargo install cargo-audit && cargo install sccache
 RUN echo "export SCCACHE_BUCKET=sccache-aws-cli" >> "/home/$USERNAME/.bashrc" \
     && echo "export SCCACHE_S3_USE_SSL=true" >> "/home/$USERNAME/.bashrc" \
-    && echo "RUSTC_WRAPPER=/usr/local/cargo/bin/sccache" >> "/home/$USERNAME/.bashrc" \
-    && echo "export SCCACHE_REGION=us-west-2" >> "/home/$USERNAME/.bashrc"
+    && echo "export RUSTC_WRAPPER=/usr/local/cargo/bin/sccache" >> "/home/$USERNAME/.bashrc" \
+    && echo "export SCCACHE_REGION=us-west-2" >> "/home/$USERNAME/.bashrc" \
+    && echo "export CARGO_INCREMENTAL=0" >> "/home/$USERNAME/.bashrc"
