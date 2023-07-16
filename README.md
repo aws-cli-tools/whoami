@@ -9,7 +9,7 @@ The CLI is flexible and allows output in either a standard string or JSON format
 ## Usage
 To run the CLI:
 ```bash
-whoami [OPTIONS]
+whoamiaws [OPTIONS]
 ```
 
 
@@ -19,6 +19,25 @@ Options:
 * `-o, --output_type` The output format (default is string) --> Fix
 * `-p, --profile` The AWS profile to use
 * `-r, --region` The AWS region to use
+
+## Installation
+
+There are two main methods for installing this tool:
+
+### Method 1: Download binaries
+
+You can download the pre-compiled binaries directly from the GitHub releases page. Choose the correct binary depending on your operating system.
+
+Visit the [releases page](https://github.com/aws-cli-tools/whoami/releases) to download the appropriate binary.
+
+### Method 2: Using Homebrew (for macOS users)
+
+If you are a macOS user and have [Homebrew](https://brew.sh/) installed, you can install this tool using the following commands:
+
+```shell
+brew tap aws-cli-tools/aws-cli-tools
+brew install whoami
+```
 
 ## Running locally
 * You can always use `cargo` to manage the build and tests.
